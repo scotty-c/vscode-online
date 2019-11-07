@@ -12,5 +12,8 @@
     "customContainers": "true",
     
     // Use the dockerfile in .devcontainer directory
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    
+    // Mount the Docker socket
+    "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock"]
   }
