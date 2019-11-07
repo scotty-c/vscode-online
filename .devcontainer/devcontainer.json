@@ -1,5 +1,5 @@
 {
-    // Install ESLint and Peacock extensions
+    // Install extensions
     "extensions": [
       "ms-azuretools.vscode-docker",
       "ms-kubernetes-tools.vscode-kubernetes-tools",
