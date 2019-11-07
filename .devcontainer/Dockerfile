@@ -1,15 +1,19 @@
  
-FROM docker:dind
+FROM debian:buster
 
 ENV HELM_VER 2.12.3
 ENV GO_VERSION 1.12.6
 
-RUN apk add bash \
-            git \
-            curl \ 
-            bash-completion \ 
-            jq \
-            ca-certificates && \
+
+
+RUN apt-get update \
+    #
+    # Install Docker CE CLI
+    && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common lsb-release \
+    && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
+    && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" \
+    && apt-get update \
+    && apt-get install -y docker-ce-cli && \
     curl https://deislabs.blob.core.windows.net/porter/latest/install-linux.sh | bash && \
     curl -o helm.tgz https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VER}-linux-amd64.tar.gz && \
     tar -xzf helm.tgz && \
@@ -19,6 +23,6 @@ RUN apk add bash \
     curl https://sh.rustup.rs -sSf | sh && \
     wget https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz && \
     sudo tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz && \
-    rm -rf go$GO_VERSION.linux-amd64.tar.gz && \
+    rm -rf go$GO_VERSION.linux-amd64.tar.gz
 
 ENV PATH="$PATH:/root/.porter"
