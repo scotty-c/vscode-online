@@ -1,0 +1,16 @@
+{
+    // Install ESLint and Peacock extensions
+    "extensions": [
+      "ms-azuretools.vscode-docker",
+      "ms-kubernetes-tools.vscode-kubernetes-tools",
+      "ms-kubernetes-tools.vscode-aks-tools",
+      "ms-vscode.Go",
+      "rust-lang.rust"
+    ],
+  
+    // Run custom container
+    "customContainers": "true",
+    
+    // Use the dockerfile in .devcontainer directory
+    "dockerfile": "Dockerfile"
+  }
