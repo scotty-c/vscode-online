@@ -8,12 +8,8 @@
       "rust-lang.rust"
     ],
   
-    // Run custom container
-    "customContainers": "true",
-    
-    // Use the dockerfile in .devcontainer directory
-    "dockerfile": "Dockerfile",
-    
+    // Run Bash script in .devcontainer directory
+    "postCreateCommand": "/bin/bash ./.devcontainer/install.sh > ~/post-create.log",
     // Mount the Docker socket
     "runArgs": ["-v","/var/run/docker.sock:/var/run/docker.sock", "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"]
   }
